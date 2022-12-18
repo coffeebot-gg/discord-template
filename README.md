@@ -46,7 +46,7 @@ Since the paths you speicify in each command will not match once you move comman
 
 
 ## Issues
-If you have any issues with the template, feel free to open an issue on the [GitHub Repository](https://github.com/coffeebottv/discord--template). We will try to get back to you as soon as possible.
+If you have any issues with the template, feel free to open an issue on the [GitHub Repository](https://github.com/coffeebottv/discord-template). We will try to get back to you as soon as possible.
 
 
 ## Shards
