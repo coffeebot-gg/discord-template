@@ -1,5 +1,5 @@
 # CoffeeBot DiscordJS v14 Template
-<img src="https://img.shields.io/badge/DiscordJS-v14.7.1-blueviolet" /> <img src="https://img.shields.io/badge/NodeJS-v16.13.0-success" />
+<img src="https://img.shields.io/badge/DiscordJS-v14.7.1-blue" /> <img src="https://img.shields.io/badge/NodeJS-v16.13.0-success" />
 
 
 This is a template for a DiscordJS v14 bot with JavaScript support. It is based on the [DiscordJS Guide](https://discordjs.guide/).
