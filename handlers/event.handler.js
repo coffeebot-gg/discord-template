@@ -1,6 +1,6 @@
 const { Events } = require("../validations/events.validation.cjs");
 const { readdirSync } = require("fs");
-
+const logger = require("../util/logger");
 
 function loadEvents(client, chalk) {
     client.removeAllListeners();
@@ -16,7 +16,7 @@ function loadEvents(client, chalk) {
             count++;
 
             if(!Events.includes(event.name) || !event.name) {
-                console.log(`event ${file} dont have a valid name`);
+                logger('client', `event ${file} dont have a valid name`);
                 return;
             }
 
@@ -38,10 +38,10 @@ function loadEvents(client, chalk) {
             continue;
         }
     }
-    return console.log(chalk.italic.blue(count + " Events Loaded"));
+    return logger('client', chalk.italic.blue(count + " Events Loaded"));
 }
 
 function unloadEvents(client) {
-    return console.log(`Unloaded Events`);
+    return logger(`Unloaded Events`);
 }
 module.exports = { loadEvents, unloadEvents };

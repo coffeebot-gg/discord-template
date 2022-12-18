@@ -11,6 +11,8 @@ This is the template used for [CoffeeBot](https://github.com/coffeebottv) and ca
 - [x] Event Handler
 - [x] Mongoose connection
 - [x] Slash Commands
+- [x] Sharding
+- [x] Express Server
 
 
 ## Getting Started
@@ -45,10 +47,29 @@ The `./commands` folder consists of a folder called `Development`, anything insi
 Since the paths you speicify in each command will not match once you move commands outside of `Development`, we recommend using the folder `Production` for all commands that you want to go live with. This way you can easily move commands from `Development` to `Production` and vice versa without changing paths to match.
 
 
+## Sharding
+> **NOTE:** Before you dive into this section, please note that sharding may not be necessary for you. Sharding is only required at 2,500 guilds—at that point, Discord will not allow your bot to login without sharding. With that in mind, you should consider this when your bot is around 2,000 guilds, which should be enough time to get this working. Contrary to popular belief, sharding itself is very simple. It can be complicated depending on your bot's needs, however. If your bot is in a total of 2,000 or more servers, then please continue with this guide. Otherwise, it may be a good idea to wait until then
+> https://discordjs.guide/sharding/#when-to-shard
+You can view a sharding example in the `V14-JS-Sharding` branch. This branch is not maintained and is only used as an example. If you have any questions about sharding, feel free to open an issue on the [GitHub Repository](https://github.com/coffeebottv/discord-template/issues). We will try to get back to you as soon as possible.
 
-## Issues
-If you have any issues with the template, feel free to open an issue on the [GitHub Repository](https://github.com/coffeebottv/discord--template). We will try to get back to you as soon as possible.
+This sharding example uses [discord-hybrid-sharding](https://www.npmjs.com/search?q=discord-hybrid-sharding) and [sharding-stats](https://www.npmjs.com/package/sharding-stats) along with [express](https://www.npmjs.com/package/express) to give an overview over shards.
+The setup requires a little more effort as you will need both `client_id` and `client_secret` from the [Discord Developer Portal](https://discord.com/developers/applications). Once you have done this, you will need to add the values belove to your `.env` file:
+
+You can then enter `http://localhost:3000` in your browser to authorize the clients access, and then head over to ``http://localhost:3000/statuspage`` to view the stats.
 
 
-## Shards
-This template does not support sharding. If you want to add sharding to your bot, you can use the [DiscordJS Sharding Manager](https://discordjs.guide/sharding/#sharding-manager-script). A template for with sharding will be added in the future.
+```
+DISCORD_CLIENT_ID_PROD=""
+DISCORD_CLIENT_ID_TEST=""
+DISCORD_CLIENT_ID_DEV=""
+
+DISCORD_CLIENT_SECRET_PROD=""
+DISCORD_CLIENT_SECRET_TEST=""
+DISCORD_CLIENT_SECRET_DEV=""
+```
+
+
+
+## Having issues?
+If you have any issues with the template, feel free to open an issue on the [GitHub Repository](https://github.com/coffeebottv/discord-template). We will try to get back to you as soon as possible.
+

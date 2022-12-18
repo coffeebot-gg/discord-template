@@ -2,7 +2,7 @@ require("dotenv").config();
 const { promisify } = require("util");
 const { glob } = require("glob");
 const PG = promisify(glob);
-
+const logger = require("../util/logger");
 
 async function loadCommands(client, chalk) {
     const { readdirSync } = require("fs");
@@ -35,12 +35,12 @@ async function loadCommands(client, chalk) {
     if(process.env.NODE_ENV === 'prod') {
         client.application.commands
         .set(commandsArray)
-        .then(console.log(chalk.italic.greenBright(`${commands} Global Command(s) Loaded`)));
+        .then(logger("client", chalk.italic.greenBright(`${commands} Global Command(s) Loaded`)));
     } else {
         const developerGuild = client.guilds.cache.get(process.env.DEV_GUILD);
         developerGuild.commands
             .set(developerArray)
-            .then(console.log(chalk.italic.magentaBright(`${devCommands} Developer Command(s) Loaded`)));
+            .then(logger("client", chalk.italic.magentaBright(`${devCommands} Developer Command(s) Loaded`)));
     }
 }
 
@@ -48,7 +48,7 @@ function unloadCommands(client) {
     client.application.commands.set([]);
     const developerGuild = client.guilds.cache.get(process.env.DEV_GUILD);
     developerGuild.commands.set([]);
-    return console.log("Unloaded Commands");
+    return logger("client", "Unloaded Commands");
 }
 
 module.exports = { loadCommands, unloadCommands };

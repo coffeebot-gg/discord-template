@@ -2,13 +2,13 @@ require('dotenv').config()
 const { ActivityType } = require("discord.js");
 const chalk = require("chalk");
 const { loadCommands } = require("../../handlers/command.handler");
-
+const logger = require("../../util/logger");
 
 module.exports = {
     name: "ready",
     once: true,
     async execute(client) {
-        console.log(chalk.italic.bold.yellowBright(`Client logged in as ${client.user.tag}.`));
+        logger('client', chalk.italic.bold.yellowBright(`Client logged in as ${client.user.tag}.`));
 
         presence({
             type: ActivityType.Streaming, 

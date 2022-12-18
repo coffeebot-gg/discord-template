@@ -1,12 +1,12 @@
 require("dotenv").config();
-require( 'console-stamp' )( console );
+const logger = require("../../util/logger.js");
 const chalk = require("chalk");
 
+const Cluster = require('discord-hybrid-sharding');
 
 
-
-const {MONGO_URI} = require('../../config')
-
+const { MONGO_URI, DISCORD_TOKEN } = require('../../config')
+const token = DISCORD_TOKEN();
 
 const envVariables = [
     "NODE_ENV",
@@ -19,8 +19,8 @@ const envVariables = [
 // checks if all the env variables are set
 const missingVariables = [];
 envVariables.forEach(varName => {
-    console.log(`Checking ENV VARIABLE: ${varName}`);
-    console.log(`VARIABLE is : ${process.env[varName]}`);
+    logger(`Checking ENV VARIABLE: ${varName}`);
+    logger(`VARIABLE is : ${process.env[varName]}`);
     if (process.env[varName] === undefined) {
         missingVariables.push(varName);
     }
@@ -30,16 +30,24 @@ if (missingVariables.length !== 0) {
     if (process.env.NODE_ENV === "prod") {
         throw msg;
     } else {
-        console.log(msg);
+        logger(msg);
     }
 }
 
 
 
 const server = async () => {
-    require("./discord");
-}
+    require('../web')
+    const manager = new Cluster.Manager(`${__dirname}/discord.js`, {
+        totalShards: 'auto',
+        shardsPerClusters: 2,
+        mode: 'process',
+        token,
+    });
 
+    manager.on('clusterCreate', cluster => logger('cluster', `Launched Cluster ${cluster.id}`));
+    manager.spawn({ timeout: -1 });
+}
 
 const mongoose = require("../mongoose");
 
@@ -53,13 +61,13 @@ const startServer = async () => {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         })
-        .then(async () => {console.log(chalk.green(`mongoose connected to [${URI}]`))})
+        .then(async () => {logger(chalk.green(`mongoose connected to [${URI}]`))})
         .catch(() => {console.warn(chalk.red(`mongoose failed to connected to [${URI}]`))});
 
     const mongo = mongoose.connection;
 
     if (mongo.states[mongo.readyState] === "disconnected") {
-        console.log(`State: ${mongo.states[mongo.readyState]} URI: ${URI}`)
+        logger(`State: ${mongo.states[mongo.readyState]} URI: ${URI}`)
         throw new Error("Something is wrong, DB connection not previously established and now is disconnected.");
     }
 

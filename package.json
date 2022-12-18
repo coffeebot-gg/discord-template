@@ -5,8 +5,8 @@
   "main": "start.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon start.js",
-    "dev-local": "nodemon start.js > log.txt"
+    "prod-global": "nodemon start.js",
+    "dev-local": "nodemon start.js > log.txt --ignore log.txt"
   },
   "type": "CommonJS",
   "repository": {
@@ -28,13 +28,15 @@
   "homepage": "https://github.com/coffeebottv/discord--template#readme",
   "dependencies": {
     "chalk": "^4.1.2",
-    "console-stamp": "^3.1.0",
+    "discord-hybrid-sharding": "^1.7.5",
     "discord.js": "^14.7.1",
     "dotenv": "^16.0.3",
+    "express": "^4.18.2",
     "glob": "^8.0.3",
     "mongoose": "^6.8.0",
     "mongoose-delete": "^0.5.4",
     "ms": "^2.1.3",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "sharding-stats": "^2.2.0"
   }
 }
