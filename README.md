@@ -51,3 +51,6 @@ If you have any issues with the template, feel free to open an issue on the [Git
 
 ## Shards
 This template does not support sharding. If you want to add sharding to your bot, you can use the [DiscordJS Sharding Manager](https://discordjs.guide/sharding/#sharding-manager-script). A template for with sharding will be added in the future.
+
+
+[❄](https://codepen.io/ILostMyMedic/full/dyjYXja)
